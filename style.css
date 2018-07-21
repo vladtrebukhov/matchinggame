@@ -1,0 +1,26 @@
+body {
+    margin: 20px;
+    padding: 0;
+    background: #6589F9;
+    box-sizing: border-box;
+}
+
+
+.grid {
+    display: grid;
+    grid-template-areas: 
+        'image image image'
+        'image image image';
+    justify-content: center;
+    grid-gap: 20px;
+    
+}
+
+.image {
+    background-size: 200px 150px;
+    width: 200px;
+    height: 150px;
+    border-radius: 10%;
+    background-repeat: no-repeat;
+    
+}
