@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // some global variables
 
 var count = 0;
@@ -9,21 +8,13 @@ var imageArray = [];
 const scoreDiv = document.createElement('div');
 scoreDiv.setAttribute('class', 'score');
 document.body.appendChild(scoreDiv);
-=======
-// add grid for images to live in
->>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b
 
 const gameDiv = document.getElementById('game');
 const grid = document.createElement('div');
 grid.setAttribute('class', 'grid');
 gameDiv.appendChild(grid);
 
-<<<<<<< HEAD
 // image object containing data
-=======
-
-// image object
->>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b
 var images = [{
   'name': 'cabin',
   'source': './images/cabin.png' },
@@ -50,9 +41,10 @@ var images = [{
   'source': './images/game.png'
 }
 ]
-<<<<<<< HEAD
 
 let doubleImages = images.concat(images);
+
+
 // sort the image numbers comparing a, b
 // .5 - Math.random() return either a negative or positive number
 // also written as .sort(() => .5 - Math.random())
@@ -63,6 +55,7 @@ doubleImages.sort((a, b) => {
     return -1;
   }
 })
+
 
 // create div with class of images and add a background of image source
 doubleImages.forEach((image) => {
@@ -83,7 +76,7 @@ grid.addEventListener('click', (event) => {
   if (event && count < 2) {
     numberOfClicks++
     count++;
-    score.innerHTML = numberOfClicks;
+    score.innerHTML = `Clicks: ${numberOfClicks}`;
     imageArray.push(images.dataset.name);
 
     if (count === 1) {
@@ -124,10 +117,6 @@ var resetCount = () => {
 
 /*
 Below is the original code to create 6 images but limited by the fact that it creates
-=======
-/*
-Original code to create 6 images but limited by the fact that it creates
->>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b
 only single image versus two of each image
 
 images.forEach((image) => {
@@ -137,7 +126,6 @@ images.forEach((image) => {
   imagesDiv.style.backgroundImage = `url(${image.source})`
 
   grid.appendChild(imagesDiv);
-<<<<<<< HEAD
 })
 
 let doubleImages = images.concat(images);
@@ -147,27 +135,3 @@ sets of the same image. I was stuck on this for a long time
 when trying to assign the same value to two different images through
 randomization. Took lots of time to figure this out!
 */
-=======
-}) */
-
-
-/* REALLY smart idea of adding the image object to itself to create two
-sets of the same image. I was stuck on this for a long time
-when trying to assign the same value to two different images through
-randomization. Took lots to figure this out!
-*/
-let doubleImages = images.concat(images);
-
-doubleImages.forEach((image) => {
-  let imagesDiv = document.createElement('div');
-  imagesDiv.setAttribute('class', 'image');
-  imagesDiv.dataset.name = image.name;
-  imagesDiv.style.backgroundImage = `url(${image.source})`;
-
-  grid.appendChild(imagesDiv);
-})
-
-
-
-console.log(doubleImages);
->>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b

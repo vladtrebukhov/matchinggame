@@ -22,11 +22,8 @@ body {
     height: 150px;
     border-radius: 10%;
     background-repeat: no-repeat;
-<<<<<<< HEAD
-   
-    
+    z-index: 1;
 }
-
 
 .hidden {
     background-image: none !important;
@@ -44,7 +41,12 @@ body {
 .score {
     font-size: 30px;
     color: white;
-=======
-    
->>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-left: 10%;   
+    margin-top: 25%;   
+    z-index: 0; 
 }
