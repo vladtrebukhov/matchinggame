@@ -1,6 +1,10 @@
-// add grid for images to live in
+// some global variables
 
+var count = 0;
+var numberOfClicks = 0;
+var imageArray = [];
 
+// add grid for images to live in and score div
 const scoreDiv = document.createElement('div');
 scoreDiv.setAttribute('class', 'score');
 document.body.appendChild(scoreDiv);
@@ -10,14 +14,7 @@ const grid = document.createElement('div');
 grid.setAttribute('class', 'grid');
 gameDiv.appendChild(grid);
 
-
-// some variables
-
-var count = 0;
-var numberOfClicks = 0;
-var imageArray = [];
-
-// image object
+// image object containing data
 var images = [{
   'name': 'cabin',
   'source': './images/cabin.png' },
@@ -44,32 +41,11 @@ var images = [{
   'source': './images/game.png'
 }
 ]
-/*
-Original code to create 6 images but limited by the fact that it creates
-only single image versus two of each image
 
-images.forEach((image) => {
-  let imagesDiv = document.createElement('div');
-  imagesDiv.setAttribute('class', 'image');
-  imagesDiv.dataset.name = image.name;
-  imagesDiv.style.backgroundImage = `url(${image.source})`
-
-  grid.appendChild(imagesDiv);
-}) */
-
-
-/* REALLY smart idea of adding the image object to itself to create two
-sets of the same image. I was stuck on this for a long time
-when trying to assign the same value to two different images through
-randomization. Took lots to figure this out!
-*/
 let doubleImages = images.concat(images);
-
-
 // sort the image numbers comparing a, b
 // .5 - Math.random() return either a negative or positive number
 // also written as .sort(() => .5 - Math.random())
-
 doubleImages.sort((a, b) => {
   if ((0.5 - Math.random()) > 0) {
     return 1;
@@ -84,8 +60,6 @@ doubleImages.forEach((image) => {
   imageDiv.setAttribute('class', 'image hidden'); // <div class="image"> </div>
   imageDiv.dataset.name = image.name;
   imageDiv.style.backgroundImage = `url(${image.source})`;
-
-
   grid.appendChild(imageDiv);
 })
 
@@ -94,14 +68,13 @@ doubleImages.forEach((image) => {
 // listen for click event for each image in grid, add a class to it
 grid.addEventListener('click', (event) => {
   images = event.target;
-  numberOfClicks++;
-  console.log(images);
-
+  const score = document.querySelector('.score');
 
   if (event && count < 2) {
+    numberOfClicks++
     count++;
+    score.innerHTML = numberOfClicks;
     imageArray.push(images.dataset.name);
-    console.log(imageArray);
 
     if (count === 1) {
       images.classList.remove('hidden');
@@ -121,6 +94,7 @@ grid.addEventListener('click', (event) => {
   }
 })
 
+// add hidden class for each image
 var noMatch = () => {
   let images = document.querySelectorAll('.image')
 
@@ -129,6 +103,8 @@ var noMatch = () => {
   })
 }
 
+
+// reset the counter and array to restart click and match process
 var resetCount = () => {
   count = 0;
   imageArray = [];
@@ -136,3 +112,23 @@ var resetCount = () => {
 
 
 
+/*
+Below is the original code to create 6 images but limited by the fact that it creates
+only single image versus two of each image
+
+images.forEach((image) => {
+  let imagesDiv = document.createElement('div');
+  imagesDiv.setAttribute('class', 'image');
+  imagesDiv.dataset.name = image.name;
+  imagesDiv.style.backgroundImage = `url(${image.source})`
+
+  grid.appendChild(imagesDiv);
+})
+
+let doubleImages = images.concat(images);
+
+ REALLY smart idea of adding the image object to itself to create two
+sets of the same image. I was stuck on this for a long time
+when trying to assign the same value to two different images through
+randomization. Took lots of time to figure this out!
+*/
