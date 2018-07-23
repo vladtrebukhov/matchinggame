@@ -22,6 +22,7 @@ body {
     height: 150px;
     border-radius: 10%;
     background-repeat: no-repeat;
+<<<<<<< HEAD
    
     
 }
@@ -43,4 +44,7 @@ body {
 .score {
     font-size: 30px;
     color: white;
+=======
+    
+>>>>>>> ee04340e0a0435404694e0afb4ee00db6f09a80b
 }
