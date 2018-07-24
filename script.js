@@ -4,13 +4,14 @@ var count = 0;
 var numberOfClicks = 0;
 var imageArray = [];
 
+
 // add grid for images to live in and score div
 const scoreDiv = document.createElement('div');
 scoreDiv.setAttribute('class', 'score');
 document.body.appendChild(scoreDiv);
 
 const gameDiv = document.getElementById('game');
-const grid = document.createElement('div');
+const grid = document.createElement('section');
 grid.setAttribute('class', 'grid');
 gameDiv.appendChild(grid);
 
@@ -71,46 +72,57 @@ doubleImages.forEach((image) => {
 // listen for click event for each image in grid, add a class to it
 grid.addEventListener('click', (event) => {
   images = event.target;
-  const score = document.querySelector('.score');
 
-  if (event && count < 2) {
-    numberOfClicks++
+  if (event) {
     count++;
-    score.innerHTML = `Clicks: ${numberOfClicks}`;
+    numberOfClicks++;
+  }
+
+  if (event && count === 1) {
+    images.classList.remove('hidden');
+    images.classList.add('selected');
     imageArray.push(images.dataset.name);
+  } else if (event && count === 2) {
+    images.classList.remove('hidden');
+    images.classList.add('selected');
+    imageArray.push(images.dataset.name);
+  }
 
-    if (count === 1) {
-      images.classList.remove('hidden');
-    } else if (count === 2) {
-      images.classList.remove('hidden');
+  if (imageArray[0] === imageArray[1]) { // if match
+    removeSelected();
+    resetCount();
+    imageArray = [];
+  };
 
-      if (imageArray[0] !== imageArray[1]) {
-        setTimeout(function () {
-          noMatch();
-          resetCount();
-        }, 1200);
-      } else {
-        count = 0;
-        resetCount();
-      }
-    }
+  if (imageArray[0] !== imageArray[1] && count === 2) {
+    setTimeout(function () { noMatch(); }, 1200);
+    resetCount();
+    imageArray = [];
   }
 })
 
-// add hidden class for each image
+// loops through the selected images and adds the hidden class for each if there is no match between the two
 var noMatch = () => {
-  let images = document.querySelectorAll('.image')
+  let images = document.querySelectorAll('.selected');
 
-  images.forEach((image) => {
+  images.forEach(image => {
     image.classList.add('hidden');
-  })
+  });
+};
+
+
+var resetCount = () => {
+  count = 0;
 }
 
 
-// reset the counter and array to restart click and match process
-var resetCount = () => {
-  count = 0;
-  imageArray = [];
+// removes selected property from ONLY the selected images
+var removeSelected = () => {
+  let images = document.querySelectorAll('.selected');
+
+  images.forEach(image => {
+    image.classList.remove('selected');
+  })
 }
 
 
