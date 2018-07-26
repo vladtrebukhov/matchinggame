@@ -3,12 +3,19 @@
 var count = 0;
 var numberOfClicks = 0;
 var imageArray = [];
+var matches = 0;
+var previousSelection = null;
 
 
-// add grid for images to live in and score div
+// add grid for images to live in, and score div/button menu
 const scoreDiv = document.createElement('div');
 scoreDiv.setAttribute('class', 'score');
 document.body.appendChild(scoreDiv);
+
+const resetButton = document.createElement('button');
+resetButton.innerHTML = 'Reset';
+resetButton.setAttribute('id', 'button');
+document.body.appendChild(resetButton);
 
 const gameDiv = document.getElementById('game');
 const grid = document.createElement('section');
@@ -57,7 +64,6 @@ doubleImages.sort((a, b) => {
   }
 })
 
-
 // create div with class of images and add a background of image source
 doubleImages.forEach((image) => {
   let imageDiv = document.createElement('div'); // <div></div>
@@ -67,39 +73,53 @@ doubleImages.forEach((image) => {
   grid.appendChild(imageDiv);
 })
 
-
+resetButton.onclick = function () {
+  location.reload();
+}
 
 // listen for click event for each image in grid, add a class to it
 grid.addEventListener('click', (event) => {
   images = event.target;
+  // don't allow the <section class="grid">  itself (this doesnt work properly) to be selected or the same card to be selected
+  if (images.nodeName === 'section' || images === previousSelection) {
+    count = 0;
+    return;
+  }
+  images.classList.add('selected');
 
   if (event) {
     count++;
     numberOfClicks++;
+    scoreDiv.innerHTML = `Clicks: ${numberOfClicks}`;
   }
 
   if (event && count === 1) {
     images.classList.remove('hidden');
-    images.classList.add('selected');
     imageArray.push(images.dataset.name);
+    previousSelection = event.target;
   } else if (event && count === 2) {
     images.classList.remove('hidden');
-    images.classList.add('selected');
     imageArray.push(images.dataset.name);
   }
 
   if (imageArray[0] === imageArray[1]) { // if match
-    removeSelected();
-    resetCount();
+    matches++;
+    count = 0;
     imageArray = [];
+    removeSelected();
+
+    if (matches === 6) {
+      scoreDiv.innerHTML = `You found all <br> the matches in <br> ${numberOfClicks} clicks!`;
+    }
   };
 
-  if (imageArray[0] !== imageArray[1] && count === 2) {
+  if (imageArray[0] !== imageArray[1] && count === 2 && imageArray[1] !== 'undefined') { // if no match
     setTimeout(function () { noMatch(); }, 1200);
-    resetCount();
+    count = 0;
     imageArray = [];
   }
 })
+
 
 // loops through the selected images and adds the hidden class for each if there is no match between the two
 var noMatch = () => {
@@ -110,12 +130,6 @@ var noMatch = () => {
   });
 };
 
-
-var resetCount = () => {
-  count = 0;
-}
-
-
 // removes selected property from ONLY the selected images
 var removeSelected = () => {
   let images = document.querySelectorAll('.selected');
@@ -124,7 +138,6 @@ var removeSelected = () => {
     image.classList.remove('selected');
   })
 }
-
 
 
 /*
