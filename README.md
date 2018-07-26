@@ -1,2 +1,2 @@
-# Matching Memory Game (work in progress)
+# Matching Memory Game
 Classic memory matching game, flip two cards over and see if they match!
