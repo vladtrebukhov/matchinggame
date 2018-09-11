@@ -80,6 +80,7 @@ resetButton.onclick = function () {
 // listen for click event for each image in grid, add a class to it
 grid.addEventListener('click', event => {
   images = event.target;
+  // if images dont contain hidden in the class, stop click
   if (!images.classList.contains('hidden')) {
     return;
   }
@@ -95,11 +96,9 @@ grid.addEventListener('click', event => {
     numberOfClicks++;
     scoreDiv.innerHTML = `Clicks: ${numberOfClicks}`;
     previousSelection = event.target;
-
-    console.log(images.dataset.name);
-    console.log(previousSelection.dataset.name);
   }
 
+  // remove hidden class on event and add name of image to array for comparison
   if (event && count === 1) {
     images.classList.remove('hidden');
     imageArray.push(images.dataset.name);
@@ -108,8 +107,8 @@ grid.addEventListener('click', event => {
     imageArray.push(images.dataset.name);
   }
 
+  // if match
   if (imageArray[0] === imageArray[1]) {
-    // if match
     matches++;
     count = 0;
     imageArray = [];
@@ -120,12 +119,12 @@ grid.addEventListener('click', event => {
     }
   }
 
+  // if no match
   if (
     imageArray[0] !== imageArray[1] &&
     count === 2 &&
     imageArray[1] !== 'undefined'
   ) {
-    // if no match
     setTimeout(function () {
       noMatch();
       removeSelected();
