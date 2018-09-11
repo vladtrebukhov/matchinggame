@@ -4,7 +4,6 @@ var count = 0;
 var numberOfClicks = 0;
 var imageArray = [];
 var matches = 0;
-var previousSelection = {};
 
 // add grid for images to live in, and score div/button menu
 const scoreDiv = document.createElement('div');
@@ -64,10 +63,10 @@ doubleImages.sort((a, b) => {
   }
 });
 
-// create div with class of images and add a background of image source
+// create div with class of images and add a background of image source, then add to grid
 doubleImages.forEach(image => {
-  let imageDiv = document.createElement('div'); // <div></div>
-  imageDiv.setAttribute('class', 'image hidden'); // <div class="image"> </div>
+  let imageDiv = document.createElement('div');
+  imageDiv.setAttribute('class', 'image hidden');
   imageDiv.dataset.name = image.name;
   imageDiv.style.backgroundImage = `url(${image.source})`;
   grid.appendChild(imageDiv);
@@ -95,7 +94,6 @@ grid.addEventListener('click', event => {
     count++;
     numberOfClicks++;
     scoreDiv.innerHTML = `Clicks: ${numberOfClicks}`;
-    previousSelection = event.target;
   }
 
   // remove hidden class on event and add name of image to array for comparison
