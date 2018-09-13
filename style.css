@@ -7,12 +7,12 @@ body {
 
 .grid {
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
         'image image image'
         'image image image';
     justify-content: center;
     grid-gap: 20px;
-    
+
 }
 
 .image {
@@ -34,25 +34,33 @@ body {
     border: .01px solid white;
 }
 
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .score {
     font-size: 30px;
     color: white;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin-left: 10%;
-    margin-top: 26%;
-   
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+
+}
+
+.button-div {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
 }
 
 #button {
-    margin-left: 80%;
-    padding: 2px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 30px;
     border-radius: 10%;
-    position: absolute;
-    bottom: 315px;
-    
+    justify-content: center;
+    align-items: center;
+
 }
