@@ -6,14 +6,22 @@ var imageArray = [];
 var matches = 0;
 
 // add grid for images to live in, and score div/button menu
+const buttonDiv = document.createElement('div');
+buttonDiv.setAttribute('class', 'button-div');
+document.body.appendChild(buttonDiv);
+
+const scoreContainer = document.createElement('div');
+scoreContainer.setAttribute('class', 'score-container');
+document.body.appendChild(scoreContainer);
+
 const scoreDiv = document.createElement('div');
 scoreDiv.setAttribute('class', 'score');
-document.body.appendChild(scoreDiv);
+scoreContainer.appendChild(scoreDiv);
 
 const resetButton = document.createElement('button');
 resetButton.innerHTML = 'Reset';
 resetButton.setAttribute('id', 'button');
-document.body.appendChild(resetButton);
+buttonDiv.appendChild(resetButton);
 
 const gameDiv = document.getElementById('game');
 const grid = document.createElement('section');
